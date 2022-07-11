@@ -26,6 +26,6 @@ describe('1 - Teste a função fetchProducts', () => {
 
   test('Verify if fetchProduct with empty parameter, returns a error message', async () => {
     const returnFunc = fetchProducts();
-    expect(returnFunc).toBe('You must provide an url');
+    expect(returnFunc).rejects.toThrow('You must provide an url');
   });
 });
