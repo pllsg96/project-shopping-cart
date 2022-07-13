@@ -65,16 +65,14 @@ const fetchProductsData = async () => {
 
 //----------------------------------------------------------------
 // Bloco fetchItem
-// createCartItemElement = ({ sku, name, salePrice })
-
 const toCart = (id, title, price) => {
   x = {
     sku: id,
     name: title,
     salePrice: price,
   };
-  father = document.getElementsByClassName('cart__items');
-  // father.appendChild(createCartItemElement(x));
+  const father = document.getElementsByClassName('cart__items')[0];
+  father.appendChild(createCartItemElement(x));
 };
 
 const catchDataItem = (data) => {
@@ -82,12 +80,30 @@ const catchDataItem = (data) => {
   toCart(id, title, price);
 };
 
-const fetchItemData = async () => {
-  const data = await fetchItem('MLB1341706310');
+const fetchItemData = async (selectedItem) => {
+  const data = await fetchItem(selectedItem);
   catchDataItem(data);
 };
 //----------------------------------------------------------------
+// Adiciona eventListener aos botões "Adiciona ao carrinho" dos elementos carregados na página
+const createOnCart = (event) => {
+  const whoIsTheFather = event.currentTarget;
+  const idSelectedItem = getSkuFromProductItem(whoIsTheFather);
+  fetchItemData(idSelectedItem);
+};
+
+const checkIfWasClicked = () => {
+  const allProductsOnPage = document.getElementsByClassName('item');
+  for (let index = 0; index < allProductsOnPage.length; index += 1) {
+    allProductsOnPage[index].addEventListener('click', createOnCart);
+  }
+};
+//----------------------------------------------------------------
+const startSetup = async () => {
+  await fetchProductsData();
+  checkIfWasClicked();
+};
+
 window.onload = () => {
-  fetchProductsData();
-  fetchItemData();
+  startSetup();
 };
