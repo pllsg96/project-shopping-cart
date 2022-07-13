@@ -39,6 +39,7 @@ const createCartItemElement = ({ sku, name, salePrice }) => {
 };
 
 //----------------------------------------------------------------
+// Bloco fetchProduct
 const cElementsWithData = (allData) => {
   const father = document.getElementsByClassName('items')[0];
   allData.forEach((unitData) => {
@@ -48,7 +49,6 @@ const cElementsWithData = (allData) => {
       name: title,
       image: thumbnail,
     };  
-    console.log(x);
     father.appendChild(createProductItemElement(x));
   });
 };
@@ -58,12 +58,36 @@ const catchData = (data) => {
   cElementsWithData(allData);
 };
 
-const creatingResults = async () => {
+const fetchProductsData = async () => {
   const data = await fetchProducts('computador');
   catchData(data);
 };
 
 //----------------------------------------------------------------
+// Bloco fetchItem
+// createCartItemElement = ({ sku, name, salePrice })
+
+const toCart = (id, title, price) => {
+  x = {
+    sku: id,
+    name: title,
+    salePrice: price,
+  };
+  father = document.getElementsByClassName('cart__items');
+  // father.appendChild(createCartItemElement(x));
+};
+
+const catchDataItem = (data) => {
+  const { id, title, price } = data;
+  toCart(id, title, price);
+};
+
+const fetchItemData = async () => {
+  const data = await fetchItem('MLB1341706310');
+  catchDataItem(data);
+};
+//----------------------------------------------------------------
 window.onload = () => {
-  creatingResults();
+  fetchProductsData();
+  fetchItemData();
 };
