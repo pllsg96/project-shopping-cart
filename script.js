@@ -38,11 +38,17 @@ const createCartItemElement = ({ sku, name, salePrice }) => {
   return li;
 };
 
+//----------------------------------------------------------------
 const cElementsWithData = (allData) => {
   const father = document.getElementsByClassName('items')[0];
   allData.forEach((unitData) => {
     const { id, title, thumbnail } = unitData;
-    const x = `{${id}, ${title}, ${thumbnail}}`;
+    const x = {
+      sku: id,
+      name: title,
+      image: thumbnail,
+    };  
+    console.log(x);
     father.appendChild(createProductItemElement(x));
   });
 };
@@ -57,6 +63,7 @@ const creatingResults = async () => {
   catchData(data);
 };
 
+//----------------------------------------------------------------
 window.onload = () => {
   console.log('teste');
 };
