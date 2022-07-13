@@ -65,5 +65,5 @@ const creatingResults = async () => {
 
 //----------------------------------------------------------------
 window.onload = () => {
-  console.log('teste');
+  creatingResults();
 };
