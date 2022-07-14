@@ -29,11 +29,12 @@ const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').inn
 //----------------------------------------------------------------
 // Atualiza Valor do carrinho
 const attValueHTML = (valor) => {
+  const roundedValor = Math.round(valor * 100) / 100;
   const htmlValor = document.createElement('h4');
   const carrinho = document.getElementsByClassName('cartValue')[0];
   htmlValor.classList.add('total-price');
   carrinho.innerHTML = '';
-  htmlValor.innerText = valor;
+  htmlValor.innerText = roundedValor;
   carrinho.appendChild(htmlValor);
 };
 
@@ -161,6 +162,7 @@ getOutMyCart.addEventListener('click', () => {
   const cart = document.getElementsByClassName('cart__items')[0];
   cart.innerHTML = '';
   checkDataInCart();
+  totalValue();
   // console.log(cart);
 });
 
