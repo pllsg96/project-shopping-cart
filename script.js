@@ -122,7 +122,10 @@ const clickedInCart = () => {
 //----------------------------------------------------------------
 const gettingAllStartElements = () => {
   const x = getSavedCartItems();
-  console.log(x);
+  const cartStartItems = document.getElementsByClassName('cart__items')[0];
+  cartStartItems.innerHTML = x;
+  clickedInCart();
+  // console.log(x);
 };
 
 const startSetup = async () => {
