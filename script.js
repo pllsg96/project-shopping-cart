@@ -27,7 +27,9 @@ const createProductItemElement = ({ sku, name, image }) => {
 const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
 
 const cartItemClickListener = (event) => {
-  // coloque seu código aqui
+  const clickedItem = event.currentTarget;
+  // console.log(clickedItem);
+  clickedItem.remove();
 };
 
 const createCartItemElement = ({ sku, name, salePrice }) => {
@@ -87,21 +89,30 @@ const fetchItemData = async (selectedItem) => {
 //----------------------------------------------------------------
 // Adiciona eventListener aos botões "Adiciona ao carrinho" dos elementos carregados na página
 const createOnCart = (event) => {
-  const whoIsTheFather = event.currentTarget;
-  const idSelectedItem = getSkuFromProductItem(whoIsTheFather);
+  const clickedItem = event.currentTarget;
+  const idSelectedItem = getSkuFromProductItem(clickedItem);
   fetchItemData(idSelectedItem);
 };
 
-const checkIfWasClicked = () => {
+const clickedInPage = () => {
   const allProductsOnPage = document.getElementsByClassName('item');
   for (let index = 0; index < allProductsOnPage.length; index += 1) {
     allProductsOnPage[index].addEventListener('click', createOnCart);
   }
 };
 //----------------------------------------------------------------
+// Adiciona eventListener aos botões "Adiciona ao carrinho" dos elementos carregados na página
+const clickedInCart = () => {
+  const allProductsOnCart = document.getElementsByClassName('cart__item');
+  for (let index = 0; index < allProductsOnCart.length; index += 1) {
+    allProductsOnCart[index].addEventListener('click', cartItemClickListener);
+  }
+};
+//----------------------------------------------------------------
 const startSetup = async () => {
   await fetchProductsData();
-  checkIfWasClicked();
+  clickedInPage();
+  clickedInCart();
 };
 
 window.onload = () => {
