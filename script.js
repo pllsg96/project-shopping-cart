@@ -27,6 +27,12 @@ const createProductItemElement = ({ sku, name, image }) => {
 const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
 
 //----------------------------------------------------------------
+// Atualiza Valor do carrinho
+const totalValue = () => {
+  const cartList = document.getElementsByClassName('cart__items')[0];
+  console.log(cartList);
+};
+//----------------------------------------------------------------
 // Bloco para caso haja mudança no acrescimo ou decrescimo de elementos no carrinho
 
 const checkDataInCart = () => {
@@ -39,6 +45,7 @@ const cartItemClickListener = (event) => {
   const clickedItem = event.currentTarget;
   // console.log(clickedItem);
   clickedItem.remove();
+  // totalValue();
   checkDataInCart();
 };
 
@@ -97,12 +104,13 @@ const fetchItemData = async (selectedItem) => {
 };
 //----------------------------------------------------------------
 // Adiciona eventListener aos botões "Adiciona ao carrinho" dos elementos carregados na página
-const createOnCart = (event) => {
+const createOnCart = async (event) => {
   const clickedItem = event.currentTarget;
   const idSelectedItem = getSkuFromProductItem(clickedItem);
-  fetchItemData(idSelectedItem);
-  getSavedCartItems();
+  await fetchItemData(idSelectedItem);
   checkDataInCart();
+  // totalValue();
+  getSavedCartItems();
 };
 
 const clickedInPage = () => {
