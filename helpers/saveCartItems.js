@@ -1,6 +1,9 @@
 const saveCartItems = (arg) => {
-  // console.log(arg);
-  localStorage.setItem('cartItems', arg);
+  console.log(arg);
+  const x = arg.innerHTML;
+  console.log(x);
+
+  localStorage.setItem('cartItems', x);
 };
 
 if (typeof module !== 'undefined') {
