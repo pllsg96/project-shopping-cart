@@ -41,6 +41,12 @@ const createCartItemElement = ({ sku, name, salePrice }) => {
 };
 
 //----------------------------------------------------------------
+// Bloco para caso haja mudança no acrescimo ou decrescimo de elementos no carrinho
+
+const checkDataInCart = () => {
+  const theCart = document.getElementsByClassName('cart__items')[0];
+};
+//----------------------------------------------------------------
 // Bloco fetchProduct
 const cElementsWithData = (allData) => {
   const father = document.getElementsByClassName('items')[0];
@@ -101,7 +107,7 @@ const clickedInPage = () => {
   }
 };
 //----------------------------------------------------------------
-// Adiciona eventListener aos botões "Adiciona ao carrinho" dos elementos carregados na página
+// Adiciona função que remove o item quando este for clicado dentro do carrinho.
 const clickedInCart = () => {
   const allProductsOnCart = document.getElementsByClassName('cart__item');
   for (let index = 0; index < allProductsOnCart.length; index += 1) {
