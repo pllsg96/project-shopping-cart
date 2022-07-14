@@ -129,10 +129,10 @@ const gettingAllStartElements = () => {
 };
 
 const startSetup = async () => {
+  gettingAllStartElements();
   await fetchProductsData();
   clickedInPage();
   clickedInCart();
-  gettingAllStartElements();
 };
 
 window.onload = () => {
