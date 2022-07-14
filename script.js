@@ -28,16 +28,26 @@ const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').inn
 
 //----------------------------------------------------------------
 // Atualiza Valor do carrinho
+const attValueHTML = (valor) => {
+  const htmlValor = document.createElement('h4');
+  const carrinho = document.getElementsByClassName('cartValue')[0];
+  htmlValor.classList.add('total-price');
+  carrinho.innerHTML = '';
+  htmlValor.innerText = valor;
+  carrinho.appendChild(htmlValor);
+};
+
 const totalValue = () => {
   const cartList = document.getElementsByClassName('cart__item');
-  // console.log(cartList);
+  let vtotal = 0;
   for (let index = 0; index < cartList.length; index += 1) {
     const a = cartList[index].innerText.split('|');
     const b = a[2];
     const c = b.split('$');
     const d = c[1];
-    console.log(d);
+    vtotal += parseFloat(d);
   }
+  attValueHTML(vtotal);
 };
 //----------------------------------------------------------------
 // Bloco para caso haja mudança no acrescimo ou decrescimo de elementos no carrinho
@@ -141,6 +151,7 @@ const gettingAllStartElements = () => {
   const cartStartItems = document.getElementsByClassName('cart__items')[0];
   cartStartItems.innerHTML = x;
   clickedInCart();
+  totalValue();
   // console.log(x);
 };
 //----------------------------------------------------------------
@@ -150,7 +161,7 @@ getOutMyCart.addEventListener('click', () => {
   const cart = document.getElementsByClassName('cart__items')[0];
   cart.innerHTML = '';
   checkDataInCart();
-  console.log(cart);
+  // console.log(cart);
 });
 
 const startSetup = async () => {
