@@ -120,6 +120,7 @@ const clickedInCart = () => {
   }
 };
 //----------------------------------------------------------------
+// Starter pack para o carrinho iniciar já com os dados anteriores ao carregamento
 const gettingAllStartElements = () => {
   const x = getSavedCartItems();
   const cartStartItems = document.getElementsByClassName('cart__items')[0];
@@ -127,6 +128,15 @@ const gettingAllStartElements = () => {
   clickedInCart();
   // console.log(x);
 };
+//----------------------------------------------------------------
+// Eventlistener do botão esvaziar carrinho
+const getOutMyCart = document.getElementsByClassName('empty-cart')[0];
+getOutMyCart.addEventListener('click', () => {
+  const cart = document.getElementsByClassName('cart__items')[0];
+  cart.innerHTML = '';
+  checkDataInCart();
+  console.log(cart);
+});
 
 const startSetup = async () => {
   gettingAllStartElements();
