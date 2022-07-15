@@ -52,7 +52,6 @@ const totalValue = () => {
 };
 //----------------------------------------------------------------
 // Bloco para caso haja mudança no acrescimo ou decrescimo de elementos no carrinho
-
 const checkDataInCart = () => {
   const theCart = document.getElementsByClassName('cart__items')[0];
   saveCartItems(theCart);
@@ -98,7 +97,6 @@ const fetchProductsData = async () => {
   const data = await fetchProducts('computador');
   catchData(data);
 };
-
 //----------------------------------------------------------------
 // Bloco fetchItem
 const toCart = (id, title, price) => {
@@ -153,7 +151,6 @@ const gettingAllStartElements = () => {
   cartStartItems.innerHTML = x;
   clickedInCart();
   totalValue();
-  // console.log(x);
 };
 //----------------------------------------------------------------
 // Eventlistener do botão esvaziar carrinho
@@ -163,12 +160,26 @@ getOutMyCart.addEventListener('click', () => {
   cart.innerHTML = '';
   checkDataInCart();
   totalValue();
-  // console.log(cart);
 });
+//----------------------------------------------------------------
+const sLoadPage = () => {
+  const loadCase = document.getElementsByClassName('theLoading')[0];
+  const textLoad = document.createElement('h3');
+  textLoad.innerText = 'Carregando!';
+  textLoad.classList.add('loading');
+  loadCase.appendChild(textLoad);
+};
+
+const fLoadPage = () => {
+  const loadCase = document.getElementsByClassName('theLoading')[0];
+  loadCase.innerHTML = '';
+};
 
 const startSetup = async () => {
-  gettingAllStartElements();
+  sLoadPage();
   await fetchProductsData();
+  fLoadPage();
+  gettingAllStartElements();
   clickedInPage();
   clickedInCart();
 };
